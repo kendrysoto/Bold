@@ -1,11 +1,11 @@
 import React from 'react'
 import { WrapperSaleCard } from './CardSale.styled'
 
-const CardSale = () => {
+const CardSale = ({select}) => {
     return(
         <WrapperSaleCard >
             <div className='header-card'>
-                <p className='header-card-title'>Total de venstas de septiembre</p>
+                <p className='header-card-title'>Total de venstas de {select}</p>
                 <span>*</span>
             </div>
             <div className='body-card'>

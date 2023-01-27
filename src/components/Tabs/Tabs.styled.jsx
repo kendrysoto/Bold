@@ -16,27 +16,38 @@ export const WrapperSaleTabs = styled.div`
       flex-direction: column;
       justify-content: space-between;
       width: 100%;
-      padding: .5rem 1rem;
+      padding: 0.5rem 1rem;
       .tabs-item {
-            color:${colors.primary};
-            font-size: 16px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 40px;
-            &:active{
-                background-color: ${colors.background};
-                border-radius: 60px;
-                height: auto;
-                height: 40px;
-                font-weight: 600;
-            }
-        }
-        @media (min-width: 768px) {
-            flex-direction: row;
-        }
+        
+        width: 100%;
+        
+      }
+
+      .button-tab{
+        color: ${colors.primary};
+        font-size: 16px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 40px;
+        background-color: white;
+        border: none;
+
+        &:focus {
+        background-color: ${colors.background};
+        border-radius: 60px;
+        height: auto;
+        height: 40px;
+        font-weight: 600;
+      }
+      }
+    
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+      }
     }
   }
 `;
