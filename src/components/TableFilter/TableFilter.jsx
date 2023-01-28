@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import { WrapperTableFilter } from "./TableFilter.styled";
 
 const TableFilter = ({ methodFiltered, select }) => {

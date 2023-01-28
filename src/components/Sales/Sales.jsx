@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { WrapperSales } from "./Sales.styled";
 import CardSale from "../CardSale/CardSale";
 import Tabs from "../Tabs/Tabs";
@@ -11,29 +11,32 @@ const Sales = () => {
   const [select, setSelect] = useState();
   const [methodFiltered, setMethodFiltered] = useState(dataTable);
 
+  useEffect(() => {
+    if(localStorage.getItem("data1")){
+      setMethodFiltered(JSON.parse(localStorage.getItem("data1")));
+    }
+  }, []);
+
   const handleOpen = () => {
     setOpen(!open);
   };
 
   const handLeFilter = (e) => {
+
+    const resultFilter = dataTable.filter(
+      (item) => item.transaction === e.target.value
+    );
     if (e.target.checked) {
-      const resultFilter = dataTable.filter(
-        (item) => item.transaction === e.target.value
-      );
-      if (methodFiltered === dataTable) {
-        setMethodFiltered([...resultFilter]);
-      } else {
-        setMethodFiltered([...methodFiltered, ...resultFilter]);
-      }
+      setMethodFiltered(methodFiltered === dataTable ? [...resultFilter] : [...methodFiltered, ...resultFilter]);
+      localStorage.setItem("data1", JSON.stringify(methodFiltered === dataTable ? [...resultFilter] : [...methodFiltered, ...resultFilter]));
+      //localStorage.setItem("checkedObject", JSON.stringify(isChecked));
     } else {
       const resultFilter = methodFiltered.filter(
         (item) => item.transaction !== e.target.value
       );
-      if (resultFilter.length === 0) {
-        setMethodFiltered(dataTable);
-      } else {
-        setMethodFiltered([...resultFilter]);
-      }
+      setMethodFiltered(resultFilter.length === 0 ? dataTable : [...resultFilter]);
+      localStorage.setItem("data1", JSON.stringify(resultFilter.length === 0 ? dataTable : [...resultFilter]));
+      //localStorage.setItem("checkedObject", JSON.stringify(isChecked));
     }
   };
 
@@ -49,12 +52,12 @@ const Sales = () => {
             <Dropdown
               open={open}
               handleOpen={handleOpen}
-              handLeFilter={handLeFilter}
+              handLeFilter={handLeFilter} 
             />
           </div>
         </div>
         <div className="table">
-          <TableFilter select={select} methodFiltered={methodFiltered} />
+          <TableFilter  select={select} methodFiltered={methodFiltered}  />
         </div>
       </div>
     </WrapperSales>

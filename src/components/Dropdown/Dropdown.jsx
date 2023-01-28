@@ -6,30 +6,31 @@ const Dropdown = ({ open, handleOpen, handLeFilter }) => {
   return (
     <WrapperDropdown>
       <div>
-        <button className="button-filter" onClick={handleOpen}>Filtrar</button>
+        <button className="button-filter" onClick={handleOpen}>
+          Filtrar
+        </button>
         {open && (
           <div className="content-check">
             <div>
               <input
                 onChange={handLeFilter}
                 type="checkbox"
-                name="methods"
+                name="datafono"
                 value="datafono"
               />
               <label>Cobro con datáfono</label>
             </div>
             <div>
               <input
-                onChange={handLeFilter}
+                onChange={handLeFilter}              
                 type="checkbox"
-                name="methods"
+                name="link"
                 value="link"
               />
               <label>Cobros con link de pago</label>
             </div>
             <div>
               <input
-                onChange={handLeFilter}
                 type="checkbox"
                 name="methods"
                 value="all"
