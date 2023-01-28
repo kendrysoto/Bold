@@ -15,7 +15,6 @@ export const WrapperSaleCard = styled.div`
     display: flex;
     align-items: center;
     color: ${colors.white};
-    gap: 1rem;
     justify-content: space-evenly;
     height: 60px;
     width: 100%;
@@ -23,6 +22,10 @@ export const WrapperSaleCard = styled.div`
       color: ${colors.white};
       font-size: 14px;
       font-weight: 600;
+    }
+    .info-icon{
+      width: 15px;
+      height: 15px;
     }
   }
 
@@ -45,9 +48,5 @@ export const WrapperSaleCard = styled.div`
       font-weight: 500;
       color: ${colors.primary};
     }
-  }
-  
-  @media (min-width: 768px) {
-    
   }
 `;

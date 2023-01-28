@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { WrapperCheckbox } from "./Checkbox.styled";
 
 const Checkbox = ({
-    type = "checkbox",
-    name,
-    checked,
-    handLeFilter,
-    value
-  }) => {
-    console.log("Checkbox: ", name, checked);
-  
-    return (
+  type = "checkbox",
+  name,
+  checked,
+  handLeFilter,
+  value,
+  label,
+}) => {
+  return (
+    <WrapperCheckbox>
       <input
         type={type}
         name={name}
@@ -17,7 +18,9 @@ const Checkbox = ({
         onChange={handLeFilter}
         value={value}
       />
-    );
-  };
+      <label>{label}</label>
+    </WrapperCheckbox>
+  );
+};
 
-  export default Checkbox;
+export default Checkbox;

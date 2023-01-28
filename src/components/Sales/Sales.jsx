@@ -4,69 +4,68 @@ import CardSale from "../CardSale/CardSale";
 import Tabs from "../Tabs/Tabs";
 import Dropdown from "../Dropdown/Dropdown";
 import TableFilter from "../TableFilter/TableFilter";
-import { dataTable, saleData } from "../../constans/dataTable";
+import { dataTable, saleData, datacheckboxes } from "../../constans/dataTable";
+import { setToLocalStorage, getToLocalStorage } from "../../utils/localStorage";
 
 const Sales = () => {
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = useState();
   const [methodFiltered, setMethodFiltered] = useState(dataTable);
-
-  useEffect(() => {
-    
-    if(localStorage.getItem("data1")){
-      setMethodFiltered(JSON.parse(localStorage.getItem("data1")));
-    }
-    if(localStorage.getItem("checkedObject")){
-      setCheckedItems(JSON.parse(localStorage.getItem("checkedObject")));
-    }
-  }, []);
+  const [checkedItems, setCheckedItems] = useState({});
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
-  const datacheckboxes = [
-    {
-      name: "datafono",
-      key: "checkBox1",
-      label: "Check Box 1"
-    },
-    {
-      name: "link",
-      key: "checkBox2",
-      label: "Check Box 2"
+  useEffect(() => {
+    if (getToLocalStorage("dataFiltered")) {
+      setMethodFiltered(JSON.parse(getToLocalStorage("dataFiltered")));
     }
-  ];
-
-  const [checkedItems, setCheckedItems] = useState({});
+    if (getToLocalStorage("checkedObject")) {
+      setCheckedItems(JSON.parse(getToLocalStorage("checkedObject")));
+    }
+  }, []);
 
   const handLeFilter = (e) => {
-
     setCheckedItems({
       ...checkedItems,
-      [e.target.value]: e.target.checked
+      [e.target.value]: e.target.checked,
     });
 
     const resultFilter = dataTable.filter(
-      (item) => item.transaction === e.target.value
+      (item) => item.type === e.target.value
     );
     if (e.target.checked) {
-      setMethodFiltered(methodFiltered === dataTable ? [...resultFilter] : [...methodFiltered, ...resultFilter]);
-      localStorage.setItem("data1", JSON.stringify(methodFiltered === dataTable ? [...resultFilter] : [...methodFiltered, ...resultFilter]));
-      localStorage.setItem("checkedObject", JSON.stringify({
+      setMethodFiltered(
+        methodFiltered === dataTable
+          ? [...resultFilter]
+          : [...methodFiltered, ...resultFilter]
+      );
+      setToLocalStorage(
+        "dataFiltered",
+        methodFiltered === dataTable
+          ? [...resultFilter]
+          : [...methodFiltered, ...resultFilter]
+      );
+      setToLocalStorage("checkedObject", {
         ...checkedItems,
-        [e.target.value]: e.target.checked
-      }));
+        [e.target.value]: e.target.checked,
+      });
     } else {
       const resultFilter = methodFiltered.filter(
-        (item) => item.transaction !== e.target.value
+        (item) => item.type !== e.target.value
       );
-      setMethodFiltered(resultFilter.length === 0 ? dataTable : [...resultFilter]);
-      localStorage.setItem("data1", JSON.stringify(resultFilter.length === 0 ? dataTable : [...resultFilter]));
-      localStorage.setItem("checkedObject", JSON.stringify({
+      setMethodFiltered(
+        resultFilter.length === 0 ? dataTable : [...resultFilter]
+      );
+      setToLocalStorage(
+        "dataFiltered",
+        resultFilter.length === 0 ? dataTable : [...resultFilter]
+      );
+      setToLocalStorage("checkedObject", {
         ...checkedItems,
-        [e.target.value]: e.target.checked
-      }));
+        [e.target.value]: e.target.checked,
+      });
     }
   };
 
@@ -82,15 +81,14 @@ const Sales = () => {
             <Dropdown
               open={open}
               handleOpen={handleOpen}
-              handLeFilter={handLeFilter} 
+              handLeFilter={handLeFilter}
               datacheckboxes={datacheckboxes}
               checkedItems={checkedItems}
-              setCheckedItems={setCheckedItems}
             />
           </div>
         </div>
         <div className="table">
-          <TableFilter  select={select} methodFiltered={methodFiltered}  />
+          <TableFilter select={select} methodFiltered={methodFiltered} />
         </div>
       </div>
     </WrapperSales>

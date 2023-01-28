@@ -40,7 +40,7 @@ export const Wrapperheader = styled.div`
       }
     }
     @media (min-width: 768px) {
-    padding: 0;
+      padding: 0;
     }
   }
   @media (min-width: 768px) {

@@ -11,9 +11,7 @@ const Header = () => {
         </div>
         <nav className="navigation">
           <ul className="navigation-item">Mi negocio</ul>
-          <ul className="navigation-item">
-            Ayuda <span>*</span>
-          </ul>
+          <ul className="navigation-item">Ayuda</ul>
         </nav>
       </div>
     </Wrapperheader>

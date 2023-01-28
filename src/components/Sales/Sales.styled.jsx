@@ -1,5 +1,4 @@
 import styled from "styled-components";
-//import { colors } from "../../styles/theme";
 import { wrapperContainer } from "../../styles/container";
 
 export const WrapperSales = styled.div`
@@ -42,6 +41,6 @@ export const WrapperSales = styled.div`
 
   .table {
     ${wrapperContainer};
-    padding-top: 1.5rem;
+    padding-top: 1rem;
   }
 `;
