@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import { WrapperDropdown } from "./Dropdown.styled";
+import Checkbox from "../Checkbox/Checkbox";
 
-const Dropdown = ({ open, handleOpen, handLeFilter }) => {
-  
+const Dropdown = ({ open, handleOpen, handLeFilter, checkedItems, datacheckboxes, setCheckedItems}) => {
   return (
     <WrapperDropdown>
       <div>
@@ -11,7 +11,28 @@ const Dropdown = ({ open, handleOpen, handLeFilter }) => {
         </button>
         {open && (
           <div className="content-check">
-            <div>
+
+{datacheckboxes.map((item) => (
+        <label key={item.key}>
+          {item.name}
+          <Checkbox
+            name={item.name}
+            checked={checkedItems[item.name]}
+            handLeFilter={handLeFilter}
+            value={item.name}
+          />
+        </label>
+      ))}
+ <label>ver todos
+ <input
+        type="checkbox"
+        name="selectAll"
+        id="selectAll"
+      />
+ </label>
+
+
+            {/* <div>
               <input
                 onChange={handLeFilter}
                 type="checkbox"
@@ -37,7 +58,7 @@ const Dropdown = ({ open, handleOpen, handLeFilter }) => {
               />
               <label>ver todos</label>
             </div>
-            <button>filtrar</button>
+            <button>filtrar</button> */}
           </div>
         )}
       </div>

@@ -15,13 +15,36 @@ const Sales = () => {
     if(localStorage.getItem("data1")){
       setMethodFiltered(JSON.parse(localStorage.getItem("data1")));
     }
+    if(localStorage.getItem("checkedObject")){
+      setCheckedItems(JSON.parse(localStorage.getItem("checkedObject")));
+    }
   }, []);
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
+  const datacheckboxes = [
+    {
+      name: "datafono",
+      key: "checkBox1",
+      label: "Check Box 1"
+    },
+    {
+      name: "link",
+      key: "checkBox2",
+      label: "Check Box 2"
+    }
+  ];
+
+  const [checkedItems, setCheckedItems] = useState({});
+
   const handLeFilter = (e) => {
+
+    setCheckedItems({
+      ...checkedItems,
+      [e.target.value]: e.target.checked
+    });
 
     const resultFilter = dataTable.filter(
       (item) => item.transaction === e.target.value
@@ -29,14 +52,20 @@ const Sales = () => {
     if (e.target.checked) {
       setMethodFiltered(methodFiltered === dataTable ? [...resultFilter] : [...methodFiltered, ...resultFilter]);
       localStorage.setItem("data1", JSON.stringify(methodFiltered === dataTable ? [...resultFilter] : [...methodFiltered, ...resultFilter]));
-      //localStorage.setItem("checkedObject", JSON.stringify(isChecked));
+      localStorage.setItem("checkedObject", JSON.stringify({
+        ...checkedItems,
+        [e.target.value]: e.target.checked
+      }));
     } else {
       const resultFilter = methodFiltered.filter(
         (item) => item.transaction !== e.target.value
       );
       setMethodFiltered(resultFilter.length === 0 ? dataTable : [...resultFilter]);
       localStorage.setItem("data1", JSON.stringify(resultFilter.length === 0 ? dataTable : [...resultFilter]));
-      //localStorage.setItem("checkedObject", JSON.stringify(isChecked));
+      localStorage.setItem("checkedObject", JSON.stringify({
+        ...checkedItems,
+        [e.target.value]: e.target.checked
+      }));
     }
   };
 
@@ -53,6 +82,9 @@ const Sales = () => {
               open={open}
               handleOpen={handleOpen}
               handLeFilter={handLeFilter} 
+              datacheckboxes={datacheckboxes}
+              checkedItems={checkedItems}
+              setCheckedItems={setCheckedItems}
             />
           </div>
         </div>
