@@ -12,6 +12,7 @@ const Sales = () => {
   const [methodFiltered, setMethodFiltered] = useState(dataTable);
 
   useEffect(() => {
+    
     if(localStorage.getItem("data1")){
       setMethodFiltered(JSON.parse(localStorage.getItem("data1")));
     }

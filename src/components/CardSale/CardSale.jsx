@@ -5,7 +5,7 @@ const CardSale = ({select}) => {
     return(
         <WrapperSaleCard >
             <div className='header-card'>
-                <p className='header-card-title'>Total de venstas de {select}</p>
+                <p className='header-card-title'>Total de ventas de {select}</p>
                 <span>*</span>
             </div>
             <div className='body-card'>

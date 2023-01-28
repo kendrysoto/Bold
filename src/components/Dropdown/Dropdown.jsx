@@ -26,7 +26,7 @@ const Dropdown = ({ open, handleOpen, handLeFilter, checkedItems, datacheckboxes
  <label>ver todos
  <input
         type="checkbox"
-        name="selectAll"
+        name="all"
         id="selectAll"
       />
  </label>
